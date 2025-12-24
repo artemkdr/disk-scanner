@@ -1,0 +1,42 @@
+﻿[package]
+name = "disk-scanner"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+description = "A fast, cross-platform CLI tool for analyzing disk usage"
+keywords = ["disk", "usage", "cli", "du", "directory"]
+categories = ["command-line-utilities", "filesystem"]
+
+[dependencies]
+# CLI argument parsing
+clap = { version = "4", features = ["derive", "cargo"] }
+
+# Parallel directory walking
+jwalk = "0.8"
+rayon = "1.10"
+
+# Cross-platform file size calculation
+filesize = "0.2"
+
+# Error handling
+anyhow = "1.0"
+
+# Progress indication
+indicatif = "0.17"
+
+# Colored terminal output
+owo-colors = "4"
+
+# Human-readable sizes
+humansize = "2"
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"
+tempfile = "3"
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
