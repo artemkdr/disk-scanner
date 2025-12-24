@@ -20,7 +20,7 @@ pub struct Args {
     pub count: usize,
 
     /// Maximum depth to display (unlimited if not specified)
-    #[arg(short, long)]
+    #[arg(short = 'd', long = "depth")]
     pub depth: Option<usize>,
 
     /// Show files in addition to directories
@@ -28,7 +28,7 @@ pub struct Args {
     pub all: bool,
 
     /// Number of threads to use (defaults to number of CPU cores)
-    #[arg(short = 'j', long = "threads")]
+    #[arg(short = 't', long = "threads")]
     pub threads: Option<usize>,
 }
 
@@ -49,15 +49,27 @@ mod tests {
         assert_eq!(args.path, PathBuf::from("."));
         assert_eq!(args.count, 10);
         assert_eq!(args.depth, None);
+        assert_eq!(args.threads, None);
         assert!(!args.all);
     }
 
     #[test]
     fn test_custom_args() {
-        let args = Args::parse_from(["disk-scanner", "/some/path", "-n", "20", "-d", "3", "--all"]);
+        let args = Args::parse_from([
+            "disk-scanner",
+            "/some/path",
+            "-n",
+            "20",
+            "-d",
+            "3",
+            "--all",
+            "-t",
+            "4",
+        ]);
         assert_eq!(args.path, PathBuf::from("/some/path"));
         assert_eq!(args.count, 20);
         assert_eq!(args.depth, Some(3));
         assert!(args.all);
+        assert_eq!(args.threads, Some(4));
     }
 }

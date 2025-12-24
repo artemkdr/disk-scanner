@@ -41,9 +41,9 @@ disk-scanner /path/to/scan
 
 ### Options
 
-- `-n, --number <N>` - Number of items to display (default: 10)
-- `-d, --depth <DEPTH>` - Maximum directory depth to scan
-- `-a, --all` - Include hidden files and directories
+- `-n, --count <N>` - Number of items to display (default: 10)
+- `-d, --depth <DEPTH>` - Maximum directory depth to display in results (note: full scan is still performed to calculate accurate folder sizes)
+- `-a, --all` - Include files in addition to directories
 - `-t, --threads <N>` - Number of threads to use (default: number of CPU cores)
 
 ### Examples

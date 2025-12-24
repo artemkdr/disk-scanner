@@ -1,0 +1,67 @@
+[config]
+default_to_workspace = false
+
+# Pre-commit checks (format check + clippy + tests)
+[tasks.precommit]
+description = "Run all pre-commit checks"
+dependencies = ["fmt", "clippy", "test"]
+
+[tasks.precommit.run_task]
+name = ["echo-success"]
+
+# Format code
+[tasks.fmt]
+description = "Format code with rustfmt"
+command = "cargo"
+args = ["fmt"]
+
+# Run clippy linter
+[tasks.clippy]
+description = "Run clippy linter"
+command = "cargo"
+args = ["clippy", "--", "-D", "warnings"]
+
+# Type check without building
+[tasks.check]
+description = "Type check without building"
+command = "cargo"
+args = ["check"]
+
+# Build debug
+[tasks.build]
+description = "Build debug binary"
+command = "cargo"
+args = ["build"]
+
+# Build release
+[tasks.release]
+description = "Build optimized release binary"
+command = "cargo"
+args = ["build", "--release"]
+
+# Run tests
+[tasks.test]
+description = "Run all tests"
+command = "cargo"
+args = ["test"]
+
+# Run all checks and build
+[tasks.all]
+description = "Run all checks and build"
+dependencies = ["fmt", "clippy", "build", "test"]
+
+# Quick development cycle (format + clippy + test)
+[tasks.dev]
+description = "Format, lint, and test"
+dependencies = ["fmt", "clippy", "test"]
+
+# Clean build artifacts
+[tasks.clean]
+description = "Clean build artifacts"
+command = "cargo"
+args = ["clean"]
+
+# Success message
+[tasks.echo-success]
+description = "Print success message"
+script = ["echo ✅ All pre-commit checks passed!"]

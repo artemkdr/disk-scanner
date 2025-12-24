@@ -1,13 +1,12 @@
-//! Integration tests for disk-scanner CLI.
-
 use assert_cmd::Command;
+use assert_cmd::cargo::cargo_bin_cmd;
 use predicates::prelude::*;
 use std::fs;
 use tempfile::tempdir;
 
 /// Get a command for running the disk-scanner binary
 fn cmd() -> Command {
-    Command::cargo_bin("disk-scanner").unwrap()
+    cargo_bin_cmd!("disk-scanner")
 }
 
 #[test]
