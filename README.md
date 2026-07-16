@@ -128,7 +128,7 @@ cargo clippy -- -W clippy::pedantic
 
 ## Project Structure
 
-```
+```text
 src/
 ├── main.rs       # Entry point, orchestrates CLI → Scanner → Display
 ├── cli.rs        # Command-line argument parsing (clap derive)
@@ -147,7 +147,7 @@ src/
 ## Dependencies
 
 | Crate | Purpose |
-|-------|---------|
+| ------- | --------- |
 | `clap` | CLI parsing with derive macros |
 | `jwalk` | Parallel directory traversal |
 | `rayon` | Parallelism and work-stealing |
