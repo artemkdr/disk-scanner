@@ -50,7 +50,8 @@ impl ScanResult {
 
     /// Sort nodes by size in descending order
     pub fn sort_by_size_desc(&mut self) {
-        self.nodes.sort_by(|a, b| b.size.cmp(&a.size));
+        self.nodes
+            .sort_by_key(|node| std::cmp::Reverse(node.size));
     }
 
     /// Get the top N nodes by size
