@@ -1,17 +1,48 @@
 # disk-scanner
 
-A fast, cross-platform CLI tool for analyzing disk usage written in Rust. Scans directories and identifies the largest files and folders, displaying them sorted by size in descending order.
+A fast, cross-platform CLI tool for analyzing disk usage written in Rust.
+Scans directories and identifies the largest files and folders,
+displaying them sorted by size in descending order.
 
 ## Features
 
-- **Parallel directory traversal** - Uses `jwalk` and `rayon` for efficient multi-threaded scanning
+- **Parallel directory traversal** - Uses `jwalk` and `rayon`
+  for efficient multi-threaded scanning
 - **Cross-platform** - Works on Linux, macOS, and Windows
-- **Accurate disk usage** - Properly handles NTFS compression, sparse files, and platform differences
+- **Accurate disk usage** - Properly handles NTFS compression,
+  sparse files, and platform differences
 - **Beautiful output** - Colored terminal output with human-readable file sizes
 - **Configurable** - Customize depth, item count, and filtering options
 - **Progress indication** - Real-time progress bars during scanning
 
 ## Installation
+
+### First-time setup (fresh machine)
+
+`disk-scanner` uses `rust-toolchain.toml` to pin the Rust channel
+and required components (`clippy`, `rustfmt`).
+
+1. Install `rustup` (Rust toolchain manager):
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+1. Reload your shell:
+
+```bash
+source "$HOME/.cargo/env"
+```
+
+1. Verify toolchain and components
+   (usually auto-installed on first Cargo command in this repo):
+
+```bash
+rustup show
+rustup component add rustfmt clippy
+```
+
+If components are already installed, the last command is a no-op.
 
 ### Build from source
 
@@ -42,7 +73,8 @@ disk-scanner /path/to/scan
 ### Options
 
 - `-n, --count <N>` - Number of items to display (default: 10)
-- `-d, --depth <DEPTH>` - Maximum directory depth to display in results (note: full scan is still performed to calculate accurate folder sizes)
+- `-d, --depth <DEPTH>` - Maximum directory depth to display in results
+  (note: full scan is still performed to calculate accurate folder sizes)
 - `-a, --all` - Include files in addition to directories
 - `-t, --threads <N>` - Number of threads to use (default: number of CPU cores)
 
@@ -139,10 +171,14 @@ src/
 
 ### Module Overview
 
-- **cli.rs** - Defines `Args` struct with clap derive macros. All CLI configuration lives here.
-- **scanner.rs** - Contains `Scanner` struct with builder pattern. Handles parallel traversal, file size calculation, and progress reporting.
-- **node.rs** - Defines `Node` (single entry) and `ScanResult` (collection with stats). Pure data structures with filtering/sorting methods.
-- **display.rs** - Formats and prints results. Supports colored output with `owo-colors` and human-readable sizes with `humansize`.
+- **cli.rs** - Defines `Args` struct with clap derive macros.
+  All CLI configuration lives here.
+- **scanner.rs** - Contains `Scanner` struct with builder pattern.
+  Handles parallel traversal, file size calculation, and progress reporting.
+- **node.rs** - Defines `Node` (single entry) and `ScanResult`
+  (collection with stats). Pure data structures with filtering/sorting methods.
+- **display.rs** - Formats and prints results. Supports colored output
+  with `owo-colors` and human-readable sizes with `humansize`.
 
 ## Dependencies
 
